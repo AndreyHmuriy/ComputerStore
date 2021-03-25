@@ -139,6 +139,7 @@
     <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.7.1\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
     </Reference>
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
     </Reference>
@@ -180,10 +181,15 @@
     </ApplicationDefinition>
     <Compile Include="ComputerStoreEntity\Characteristic.cs" />
     <Compile Include="ComputerStoreEntity\CharacteristicType.cs" />
+    <Compile Include="ComputerStoreEntity\CharacteristicWithTypes.cs" />
     <Compile Include="ComputerStoreEntity\ComputerStoreContext.cs" />
     <Compile Include="ComputerStoreEntity\Device.cs" />
     <Compile Include="ComputerStoreEntity\DeviceType.cs" />
     <Compile Include="ComputerStoreEntity\ValueType.cs" />
+    <Compile Include="Model\DeviceCharacteristics.cs" />
+    <Compile Include="Model\ImageConverter.cs" />
+    <Compile Include="Model\StringFilter.cs" />
+    <Compile Include="Queries\DBQuery.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Page Include="MainWindow.xaml">
@@ -225,6 +231,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\185025.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\SQLitePCLRaw.lib.e_sqlite3.2.0.2\build\net461\SQLitePCLRaw.lib.e_sqlite3.targets" Condition="Exists('..\packages\SQLitePCLRaw.lib.e_sqlite3.2.0.2\build\net461\SQLitePCLRaw.lib.e_sqlite3.targets')" />

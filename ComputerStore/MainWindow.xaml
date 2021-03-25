@@ -4,8 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ComputerStore"
+        xmlns:converter="clr-namespace:ComputerStore.Model"
+        xmlns:model ="clr-namespace:ComputerStore.Model"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800"
+        DataContext="{Binding Main, Source={StaticResource Locator}}">
+    <Window.Resources>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
@@ -14,10 +19,75 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="150"/>
             <ColumnDefinition/>
+            <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
 
-        <ToolBar Grid.Row="0" Grid.ColumnSpan="2">
+        <ToolBar Grid.Row="0" Grid.ColumnSpan="3">
             <Button Width="24" Height="24"/>
         </ToolBar>
+
+        <Grid Grid.Row="1" Grid.Column="0" VerticalAlignment="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Background="AliceBlue" >
+                <TextBlock Margin="2" Text="Тип устройства" />
+                <ComboBox Margin="2" ItemsSource="{Binding DeviceTypeList}" DisplayMemberPath="Name" SelectedItem="{Binding CurrentDeviceType, Mode=TwoWay}" />
+            </StackPanel>
+            <ListBox Grid.Row="1" ItemsSource="{Binding FilterList}">
+                <ListBox.Resources>
+                    <!--Для списков с выбором-->
+                    <DataTemplate DataType="{x:Type model:StringFilter}">
+                        <Expander Header="{Binding Name}" Padding="2" Width="130">
+                            <ItemsControl ItemsSource="{Binding Elements}">
+                                <ItemsControl.Resources>
+                                    <DataTemplate DataType="{x:Type model:CheckedElement}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <CheckBox IsChecked="{Binding IsChecked}"/>
+                                            <TextBlock Text="{Binding Value}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ItemsControl.Resources>
+                            </ItemsControl>
+                        </Expander>
+                    </DataTemplate>
+                </ListBox.Resources>
+            </ListBox>
+
+        </Grid>
+
+        <ListBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Devices}" SelectedItem="{Binding CurrentDevice}" >
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <WrapPanel Orientation="Horizontal">
+                        <Image Width="32" Height="32" Stretch="Fill" 
+                               Source="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Window},Path=DataContext.DefaultDeviceTypeImage}"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="Наименование: "/>
+                            <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Name}"/>
+                        </Grid>
+                    </WrapPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <ListView Grid.Row="1" Grid.Column="2" ItemsSource="{Binding DeviceCharacteristics}">
+            <ListView.View>
+                <GridView>
+                    <GridView.Columns>
+                        <GridViewColumn Header="Характеристика" DisplayMemberBinding="{Binding Name}"/>
+                        <GridViewColumn Header="Значение" DisplayMemberBinding="{Binding Value}"/>
+                    </GridView.Columns>
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </Window>

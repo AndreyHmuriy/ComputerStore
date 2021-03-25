@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ComputerStore.ComputerStoreEntity
 {
-    class ValueType
+    public class ValueType
     {
         public int ID { get; set; }
         public string Name { get; set; }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ComputerStore.ComputerStoreEntity
 {
-    class Characteristic
+    public class Characteristic
     {
         public int ID { get; set; }
         public int DeviceID { get; set; }

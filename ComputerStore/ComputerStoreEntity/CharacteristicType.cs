@@ -6,25 +6,31 @@ using System.Threading.Tasks;
 
 namespace ComputerStore.ComputerStoreEntity
 {
-    class CharacteristicType
+    public class CharacteristicType
     {
         public int ID { get; set; }
         public int DeviceTypeID { get; set; }
         public string Name { get; set; }
         public int ValueTypeID { get; set; }
-        public bool Seach { get; set; }
+        //public bool Seach { get; set; }
 
         public CharacteristicType()
         {
 
         }
 
-        public CharacteristicType(int deviceTypeID, string name, int valueTypeID, bool seach)
+        public CharacteristicType(int deviceTypeID, string name, int valueTypeID/*, bool seach*/)
         {
             DeviceTypeID = deviceTypeID;
             Name = name;
             ValueTypeID = valueTypeID;
-            Seach = seach;
+            //Seach = seach;
+        }
+
+        public CharacteristicType(int id,int deviceTypeID, string name, int valueTypeID/*, bool seach*/):
+            this(deviceTypeID, name,valueTypeID/*,seach*/)
+        {
+            ID = id;
         }
 
         public ValueType ValueType { get; set; }

@@ -23,10 +23,6 @@ namespace ComputerStore
         public MainWindow()
         {
             InitializeComponent();
-            using(var context = new ComputerStoreEntity.ComputerStoreContext())
-            {
-                context.CreateDataBase();
-            }
         }
     }
 }
